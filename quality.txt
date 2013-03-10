@@ -1,0 +1,60 @@
+YAUI quality set
+
+	*	views
+		-	view
+			&	set xywh
+			&	show, hide
+		-	window on desktop or page on mobile
+		-	static_text :view
+			&	set text
+		-	button :static_text
+			&	onclick(sender)
+		-	input :static_text
+			&	onchange(sender), onkey<only to support ENTER>(sender, key)
+			&	set font color, size, name
+			&	get text
+		-	edit :input
+		-	image :view
+			&	set image file name
+		-	horizontal scrolling group :view
+			&	set client wh<iphone uses wh, android auto adjust after some function>
+			<insert_child not needed, we supply parent id when create child>
+			<consider: onscroll, get_scroll_pos()>
+		-	vertical scrolling group :horizontal scrolling group
+	*	file io
+		-	load yadbr example
+		-	save(string) <utf8>
+		-	string load() <utf8>
+	*	system
+		-	print(string) <no line ending added>
+		-	alert(string)
+		-	require(), require_path[] <phone app in require_path>
+		-	timer
+			&	setTimeout setInterval clearTimeout/Interval
+	*	JS error reporting
+		-	report bootstrap syntax error
+		-	report bootstrap execution error
+			&	to console
+		-	report require() file loading failure
+		-	report required file syntax error
+		-	report required file execution error
+			&	to caller JS script as 'error' object
+		-	report callback syntax error
+		-	report callback execution error
+			&	to another callback as JS 'error' object
+
+---------------------------------
+Naming
+	yadroid(yadroid_NAME, ...)
+	winapi_NAME(...)
+	ijs_NAME(...), ijs_contorl_ui(ijs_NAME, ...)
+---------------------------------
+discussion after this line
+Q: should we ever need to delete views?
+
+IMPORTANT: we do not need many property getters in low level yaui! 
+	before you set anything, remember that property somewhere in 
+	javascript so you can access later.
+	text editor is an exception of course, get_text() is needed.
+
+	
