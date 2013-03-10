@@ -1,0 +1,20 @@
+ toolbar_height = 8
+ var wh = yaui.get_app_size(), w = wh[0] * 0.01, h = wh[1] * 0.01, x = w, y = h
+yaui.create('input').set_text('click the button -->').set_id('in').add_cls(['mainpage']).set_xy(w * 15, 0).set_wh(w * 55, h * toolbar_height)
+yaui.create('button').set_text('Go').set_id('go').add_cls(['mainpage']).set_wh(w*15, h*toolbar_height).set_xy(w * (55 + 16), 0).bind('button', function() {
+	select({cls:['mainpage']}).hide().apply()
+	select({cls:['dropdown']}).show().apply()
+})
+select({cls:['mainpage']}).show().apply()
+
+dropdown = ['abc', 'cde', 'qwe', 'hello', 'world']
+
+for (var i = 0; i < dropdown.length; i++) {
+	yaui.create('button').set_text([dropdown[i]]).set_id(dropdown[i]).add_cls(['dropdown']).set_wh(w*15, h*toolbar_height).set_xy(10, i * h * 8).bind('button', function(sender){
+		select({cls:['dropdown']}).hide().apply()
+		select({cls:['mainpage']}).show().apply()
+		select({id:['in']}).set_text(sender.text).apply()
+	})
+}
+
+	

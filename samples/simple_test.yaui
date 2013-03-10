@@ -1,0 +1,108 @@
+/*
+	This is used to test low level functionality of YaUI
+*/
+yaui.simple_test = function() {
+
+
+yaui.on.key_down = function(id, key) { // Only supported on Windows
+}
+
+	// BUTTONS
+
+	var wh = yaui.get_app_size(), x = wh[0] * 0.05, y = wh[1] * 0.03, w = wh[0] * 0.4, h = wh[1] * 0.08
+	var COLOR = [0, 0.5, 0.1, 0.3];
+
+	function mk_test_button(apply_xywh, apply_text, apply_font, apply_show) {
+		var b = yaui.make_button(yaui.root_handle)
+		if (apply_xywh) yaui.set_xywh(b, x, y, w, h); y += h * 1.2
+		if (apply_text) yaui.set_text(b, 'new中cap')
+		if (apply_font) yaui.set_font(b, 'fixed7', 11, COLOR)
+		if (apply_show) yaui.show(b)
+		return b
+	}
+	mk_test_button(true, false, false, true)
+	mk_test_button(true, false, false, false)
+	mk_test_button(true, true, true, true)
+	mk_test_button(false, false, false, true)
+	mk_test_button(true, true, false, true)
+	yaui.set_text(mk_test_button(true, true, true, true), JSON.stringify(wh))
+
+	// HVIEW SCROLLED LABEL AND NORMAL LABEL FOR COMPARISON
+
+	var hv = yaui.make_hview(yaui.root_handle)
+	yaui.set_xywh(hv, x, y, w, h+18); y += h * 1.2 +18
+		var l1 = yaui.make_button(hv)
+			yaui.set_xywh(l1, 0, 0, wh[0], h-2);
+			yaui.set_text(l1, 'DEFGHIJKLMNOPQRSTUVWXYZ1234567890qazwsxedcrfvtgbyhnujmikolp')
+		yaui.show(l1)
+		var lb = yaui.make_button(hv)
+			yaui.set_xywh(lb, wh[0], 0, wh[0], h-2);
+			yaui.set_text(lb, 'DEFGHIJKLMNOPQRSTUVWXYZ1234567890qazwsxedcrfvtgbyhnujmikolp')
+		yaui.show(lb)
+	yaui.set_scroll_area(hv, wh[0] * 2)
+	yaui.show(hv)
+
+	var l2 = yaui.make_label(yaui.root_handle)
+		yaui.set_text(l2, 'DEFGHIJKLMNOPQRSTUVWXYZ1234567890qazwsxedcrfvtgbyhnujmikolp')
+		yaui.set_xywh(l2, 0, y, wh[0], h/2); y += h * 0.5 + .2
+	yaui.show(l2)
+
+	// IMAGE
+
+	var m = yaui.make_image(yaui.root_handle, 'yauiblue100.png')
+	yaui.set_xywh(m, wh[0] / 4 - 50, y, 100, 100); y += 100 + h * 0.2
+	yaui.show(m)
+
+	// SCREEN SIZE, BUTTON IN THE FAR CORNER
+
+	var b = yaui.make_button(yaui.root_handle)
+		yaui.set_xywh(b, wh[0] - wh[0] * 0.1, wh[1] - wh[1] * 0.1, wh[0] * 0.1, wh[1] * 0.1);
+		yaui.set_text(b, '+')
+		yaui.set_font(b, 'fixed7', 11, COLOR)
+	yaui.show(b)
+
+	// LABELS
+
+	var wh = yaui.get_app_size(), x = wh[0] * 0.05, y = wh[0] * 0.03, w = wh[0] * 0.4, h = wh[1] * 0.08
+	y += h * 1.2
+	var l = yaui.make_label(yaui.root_handle)
+		yaui.set_xywh(l, x, y, w, h); y += h * 1.2
+		yaui.set_text(l, '(red)invisible button')
+		yaui.set_font(l, 'fixed7', 11, [1, 0, 0, 0.3])
+	yaui.show(l)
+	y += h * 1.2
+	var l = yaui.make_label(yaui.root_handle)
+		yaui.set_xywh(l, x, y, w, h); y += h * 1.2
+		yaui.set_text(l, '(blue)btn no xywh 中')
+		yaui.set_font(l, 'fixed7', 11, [0, 0, 1, 0.3])
+	yaui.show(l)
+
+	//	INPUT & EDIT
+	var wh = yaui.get_app_size(), x = wh[0] / 2 + wh[0] * 0.05, y = wh[0] * 0.1, w = wh[0] * 0.4, h = wh[1] * 0.06
+	var i1 = yaui.make_input(yaui.root_handle)
+		yaui.set_xywh(i1, x, y, w, h); y += h * 1.2
+		yaui.set_text(i1, '中input0')
+		yaui.set_font(i1, 'fixed7', 11, [0,0,1,.8])
+	yaui.show(i1)
+	var e = yaui.make_edit(yaui.root_handle)
+		yaui.set_xywh(e, x, y, w, h * 3); y += h * 3.2
+		yaui.set_text(e, '0 月\n1 这 - blue\n2 世')
+		yaui.set_font(e, 'fixed7', 11, [0,0,1,.8])
+	yaui.show(e)
+	var e1 = yaui.make_edit(yaui.root_handle)
+		yaui.set_xywh(e1, x, y, w, h * 3); y += h * 3.2
+		yaui.set_text(e1, '{' + yaui.get_text(i1) + '}\n{' + yaui.get_text(e) + '}' )
+		yaui.set_font(e1, 'fixed7', 11, [0,0,1,.8])
+	yaui.show(e1)
+	yaui.set_read_only(e1)
+
+	yaui.set_scroll_area(hv, wh[0]*2)
+	yaui.set_xywh(lb, 0, 0, 0, 0);
+	yaui.hide(lb)
+
+setInterval(function() { print('-') }, 1000)
+setInterval(function() { print('+') }, 500)
+setTimeout(function(y) { clearTimeout(0) }, 2400)
+setTimeout(function(y) { clearTimeout(1) }, 5000)
+}
+yaui.simple_test()
