@@ -1,0 +1,12 @@
+#this will compile the application, (I use this on j/b iPhone) -- yakov
+clang++ -lstdc++ iJS.o -limonkey -L. -x objective-c main.m -isysroot ~/sdk6/ -miphoneos-version-min=2 -L~/sdk6/usr/lib -lobjc -o main \
+-framework UIKit \
+-framework Foundation \
+-framework QuartzCore \
+-Wfatal-errors \
+$* \
+-w 2>&1 | grep -v "ld warning: bad symbol version"
+ls -l main
+OK=$?
+if [ $OK -eq 0 ] ; then echo ok ; fi
+if [ $OK -eq 0 ] ; then pup ; fi

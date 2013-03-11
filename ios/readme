@@ -1,0 +1,7 @@
+main.m - is application source (objective-c)
+iJS.cpp  - this will interface obj-c and spidermonkey
+stone.h - our runtime c++ library, amalgamated for ease of use. here it is used only for strings, so can remove this dependency at all if replace stone::str with NSString or JS_String.
+
+Mar 11 2013
+yakov
+
